@@ -9,17 +9,30 @@ class GreetingWithoutHooks extends Component {
     super(props);
 
     this.state = {
-      val: ""
+      val: "",
+      width: window.innerWidth
     };
   }
 
   componentDidMount() {
     document.title = this.state.val;
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentDidUpdate() {
     document.title = this.state.val;
   }
+
+  componentWillUnmount() {
+    // unsubscribe to avoid any memory leaks
+    window.removeEventListener("resize", this.handleResize);
+  }
+
+  handleResize = e => {
+    this.setState({
+      width: window.innerWidth
+    });
+  };
 
   handleOnChange = e => {
     this.setState({
@@ -40,6 +53,8 @@ class GreetingWithoutHooks extends Component {
             />
           </Row>
           {this.state.val ? <Row>The value: {this.state.val} </Row> : null}
+
+          <Row>The window width is: {this.state.width}</Row>
         </Main>
       </Box>
     );

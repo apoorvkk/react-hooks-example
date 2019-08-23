@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "Box";
 import Header from "Header";
 import Main from "Main";
@@ -6,6 +6,10 @@ import Row from "Row";
 
 const GreetingWithHooks = () => {
   const [val, setVal] = useState("");
+
+  useEffect(() => {
+    document.title = val;
+  });
 
   const handleOnChange = e => {
     setVal(e.target.value);

@@ -13,6 +13,14 @@ class GreetingWithoutHooks extends Component {
     };
   }
 
+  componentDidMount() {
+    document.title = this.state.val;
+  }
+
+  componentDidUpdate() {
+    document.title = this.state.val;
+  }
+
   handleOnChange = e => {
     this.setState({
       val: e.target.value

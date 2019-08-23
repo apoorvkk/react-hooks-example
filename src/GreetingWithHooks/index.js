@@ -6,9 +6,19 @@ import Row from "Row";
 
 const GreetingWithHooks = () => {
   const [val, setVal] = useState("");
-
   useEffect(() => {
     document.title = val;
+  });
+
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   });
 
   const handleOnChange = e => {
@@ -23,6 +33,7 @@ const GreetingWithHooks = () => {
           <input type="text" val={val} onChange={handleOnChange} />
         </Row>
         {val ? <Row>The value: {val} </Row> : null}
+        <Row>The window width is: {width}</Row>
       </Main>
     </Box>
   );

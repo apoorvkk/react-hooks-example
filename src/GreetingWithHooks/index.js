@@ -6,6 +6,10 @@ import Row from "Row";
 
 const GreetingWithHooks = () => {
   const [val, setVal] = useState("");
+  const handleOnChange = e => {
+    setVal(e.target.value);
+  };
+
   useEffect(() => {
     document.title = val;
   });
@@ -15,15 +19,13 @@ const GreetingWithHooks = () => {
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
+
     window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   });
-
-  const handleOnChange = e => {
-    setVal(e.target.value);
-  };
 
   return (
     <Box>

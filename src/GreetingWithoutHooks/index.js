@@ -16,6 +16,7 @@ class GreetingWithoutHooks extends Component {
 
   componentDidMount() {
     document.title = this.state.val;
+
     window.addEventListener("resize", this.handleResize);
   }
 
